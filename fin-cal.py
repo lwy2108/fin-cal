@@ -1,6 +1,9 @@
 """
-fin-cal.py: A simple program for financial events.
+fin-cal.py: A simple program to track financial events.
 """
+
+import datetime as dt
+import re
 
 
 class Data:
@@ -15,9 +18,9 @@ class Data:
 
 class Event:
 
-    def __init__(self, date, time, description, sentiment):
-        self.date = date  # to store in proper form
-        self.time = time  # consider format
+    def __init__(self, datetime, est_time, description, sentiment):
+        self.datetime = dt.datetime.strptime(datetime, '%d-%m-%y %H:%M')
+        self.est_time = est_time
         self.description = description
         self.sentiment = sentiment
 
@@ -29,28 +32,44 @@ class Event:
         # improve date display - consider formatting
         # provide for text descriptors (today, tomorrow, this week, next week)
 
-    def add_event():
+    def add_event(self):
         pass
 
-    def edit_event():
+    def edit_event(self):
         pass
 
-    def delete_event():
+    def delete_event(self):
         pass
 
-    def list_upcoming():
+    def list_upcoming(self):
         pass
 
-    def list_all():
+    def list_all(self):
         pass
 
 
 class Web:
-    def scrape():
+    def scrape(self):
         pass
 
-    def notify():
+    def notify(self):
         pass
 
 
-event_test = Event('130821', 'POST', 'SOFI EARNINGS', 'BULLISH')
+print('Please enter event date (DD-MM-YY):')
+event_date = input() # validate date
+print('Time if available (HH:MM):')
+event_time = input()  # fix on empty
+
+# validate time (testing)
+if re.match('^[0-9]{2}:[0-9]{2}$', event_time):
+    print('Match')
+else:
+    print('Fail')
+
+event_datetime = '{} {}'.format(event_date, event_time)
+print(event_datetime)
+
+# event_test = Event(event_datetime, 'POST', 'SOFI EARNINGS', 'BULLISH')
+# print(event_test.datetime)
+# print(event_test.est_time)
